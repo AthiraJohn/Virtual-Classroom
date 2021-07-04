@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const teacherSchema = new Schema({
-    name:{
+    username:{
         type:String,
         required:true
     },
@@ -12,7 +12,7 @@ const teacherSchema = new Schema({
         required:true,
         unique:true
     },
-    password:{
+    pwd:{
         type:String,
         required:true,
     },

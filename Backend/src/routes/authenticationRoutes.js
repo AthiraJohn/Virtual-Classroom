@@ -19,9 +19,9 @@ aRouter.post('/TsignUp',async(req,res)=>{
     var data = await teacherModel.countDocuments({email:email});
     if(!data){
         var teacher = new teacherModel;
-        teacher.name = req.body.teacher.name;
+        teacher.username = req.body.teacher.username;
         teacher.email = req.body.teacher.email;
-        teacher.password = await bcrypt.hash(req.body.teacher.password,12);
+        teacher.pwd = await bcrypt.hash(req.body.teacher.pwd,12);
         teacher.save((err,doc)=>{
             if(!err){
                 res.send(doc);
@@ -38,19 +38,19 @@ aRouter.post('/TsignUp',async(req,res)=>{
 //Teacher Login
 aRouter.post('/Tlogin',async(req,res)=>{
     const email = req.body.teacher.email;
-    const password = req.body.teacher.password;
+    const pwd = req.body.teacher.pwd;
 
     const data = await teacherModel.findOne({email});
     if(!data){
         res.status(401).send('Email address not found!');
     }
     else{
-        const passmatch = await bcrypt.compare(password,data.password);
+        const passmatch = await bcrypt.compare(pwd,data.pwd);
         if(!passmatch){
             res.status(401).send('Invalid Credentials');
         }
         else{
-            let payload = {subject:email+password};
+            let payload = {subject:email+pwd};
             let token = jwt.sign(payload,'#key');
             const id = data._id;
             res.status(200).send({id,token});
@@ -66,9 +66,9 @@ aRouter.post('/SsignUp',async(req,res)=>{
     const data = await studentModel.countDocuments({email:email});
     if(!data){
         var student = new studentModel;
-        student.name = req.body.student.name;
+        student.username = req.body.student.username;
         student.email = req.body.student.email;
-        student.password = await bcrypt.hash(req.body.student.password,12);
+        student.pwd = await bcrypt.hash(req.body.student.pwd,12);
         student.save((err,doc)=>{
             if(!err){
                 res.send(doc);
@@ -86,19 +86,19 @@ aRouter.post('/SsignUp',async(req,res)=>{
 //Student login
 aRouter.post('/Slogin',async(req,res)=>{
     const email = req.body.student.email;
-    const password = req.body.student.password;
+    const pwd = req.body.student.pwd;
 
     const data = await studentModel.findOne({email});
     if(!data){
         res.status(401).send('Email address not found');
     }
     else{
-        const passmatch = await bcrypt.compare(password,data.password);
+        const passmatch = await bcrypt.compare(pwd,data.pwd);
         if(!passmatch){
             res.status(401).send('Invalid Credentials');
         }
         else{
-            let payload = {subject:email+password};
+            let payload = {subject:email+pwd};
             let token = jwt.sign(payload,'#key');
             const id = data._id;
             res.status(200).send({id,token});

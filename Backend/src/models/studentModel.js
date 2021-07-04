@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
-    name:{
+    username:{
         type:String,
         required:true,
     },
@@ -11,7 +11,7 @@ const studentSchema = new Schema({
         required:true,
         unique:true
     },
-    password:{
+    pwd:{
         type:String,
         required:true
     },
