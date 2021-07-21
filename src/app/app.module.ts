@@ -13,6 +13,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
+import { CreateClassComponent } from './create-class/create-class.component';
+import { EnrollClassComponent } from './enroll-class/enroll-class.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { StudentHomeComponent } from './student-home/student-home.component';
     SignupComponent,
     LoginComponent,
     TeacherHomeComponent,
-    StudentHomeComponent
+    StudentHomeComponent,
+    CreateClassComponent,
+    EnrollClassComponent
   ],
   imports: [
     BrowserModule,

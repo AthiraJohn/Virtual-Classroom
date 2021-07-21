@@ -23,6 +23,14 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
+  isTeacher(){
+    return !!localStorage.getItem('tId');
+  }
+
+  isStudent(){
+    return !!localStorage.getItem('sId');
+  }
+
   getToken(){
     return localStorage.getItem('token');
   }
