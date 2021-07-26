@@ -15,7 +15,7 @@ const studentSchema = new Schema({
         type:String,
         required:true
     },
-    classes:[],
+    classes:[{type: Schema.Types.ObjectId, ref:'classes'}],
     submissions:[{classCode:String,work:String}]
 });
 

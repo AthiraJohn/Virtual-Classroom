@@ -21,8 +21,8 @@ export class ClassesService {
     return this.http.get('http://localhost:3000/class/classList');
   }
   //Student enroll class
-  enrollClass(classCode:any,id:any){
-    return this.http.post('http://localhost:3000/class/enrollClass',{'classCode':classCode,'id':id})
+  enrollClass(classid:any,id:any){
+    return this.http.post('http://localhost:3000/class/enrollClass',{'classid':classid,'id':id})
   }
   //list all enrolled classes of a student
   getClassStudent(id:any):Observable<any>{
@@ -31,5 +31,15 @@ export class ClassesService {
   //get single class details
   getSingleClass(id:any):Observable<any>{
     return this.http.get<any>('http://localhost:3000/class/'+id);
+  }
+
+  //update class details teacher
+  updateClass(classData:any):Observable<any>{
+    console.log(classData);
+    return this.http.put<any>('http://localhost:3000/class/update',classData);
+  }
+  //delete a class
+  deleteClass(id:any):Observable<any>{
+    return this.http.delete('http://localhost:3000/class/delete/'+id);
   }
 }

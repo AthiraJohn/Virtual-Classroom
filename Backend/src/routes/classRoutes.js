@@ -1,10 +1,15 @@
 const express = require('express');
 const cRouter = express.Router();
 const verifyToken = require('./verify');
+const mongoose = require('mongoose');
 
 const classModel = require('../models/classModel');
 const teacherModel = require('../models/teacherModel');
 const studentModel = require('../models/studentModel');
+const { Mongoose } = require('mongoose');
+const { consoleTestResultHandler } = require('tslint/lib/test');
+
+const toId = mongoose.Types.ObjectId;
 
 //create class: teacher
 cRouter.post('/create',verifyToken,async(req,res)=>{
@@ -20,11 +25,12 @@ cRouter.post('/create',verifyToken,async(req,res)=>{
         classData.className = req.body.class.className;
         classData.classCode = req.body.class.classCode;
         classData.Teacher = teachertemp.username
-        console.log(teachertemp.username);
-        var teacherData = await teacherModel.updateOne({"_id":tId},
-                                                            {$push:{classes:classCode}});                                                           
-        classData.save((err,doc)=>{
+        // var teacherData = await teacherModel.updateOne({"_id":tId},
+        //                                                     {$push:{classes:classCode}});                                                           
+        classData.save(async(err,doc)=>{
          if(!err){
+             const id = doc._id;
+            var teacherData = await teacherModel.updateOne({"_id":tId},{$push:{classes:id}});
              res.send(doc);
            }
          else{
@@ -42,16 +48,18 @@ cRouter.post('/create',verifyToken,async(req,res)=>{
 //get classes by a teacher
 cRouter.post('/teacherList',verifyToken,async(req,res)=>{
     const id = req.body.id;
-    const teacherData = await teacherModel.findById(id);
-    const teacherClasses = teacherData.classes;
-    // console.log(teacherClasses[0]);
+    const teacherData = await teacherModel.findById(id).populate('classes');
+    // const teacherClasses = teacherData.classes;
+    // // console.log(teacherClasses[0]);
     
-    var list = [];
-    for(i=0;i<teacherClasses.length;i++){
-        var temp = await classModel.findOne({'classCode':teacherClasses[i]});
-        list.push(temp);
-    }
-    res.status(200).send(list);
+    // var list = [];
+    // for(i=0;i<teacherClasses.length;i++){
+    //     var temp = await classModel.findOne({'classCode':teacherClasses[i]});
+    //     list.push(temp);
+    // }
+    // res.status(200).send(list);
+    res.status(200).send(teacherData.classes);
+
 
 
 });
@@ -67,15 +75,17 @@ cRouter.get('/classList',async(req,res)=>{
 //enroll in a class student
 cRouter.post('/enrollClass',verifyToken,async(req,res)=>{
     var id = req.body.id;
-    var classCode = req.body.classCode;
+    var classid = req.body.classid;
     
+    var classData = await classModel.findById(classid);
     var student = await studentModel.findById(id);
-    if(student.classes.includes(classCode)){
+    // console.log(student.classes);
+    if(student.classes.includes(classid)){
         res.status(401).send("Already Enrolled in Class");
     }
     else{
         var studentData = await studentModel.updateOne({"_id":id},
-                                                            {$push:{classes:classCode}});
+                                                            {$push:{classes:classid}});
         res.status(200).send();                                                            
     }
 });
@@ -83,15 +93,8 @@ cRouter.post('/enrollClass',verifyToken,async(req,res)=>{
 //list classses enrolled by a student
 cRouter.post('/studentlist',verifyToken,async(req,res)=>{
     const id = req.body.id;
-    const studentData = await studentModel.findById(id);
-    const studentClasses = studentData.classes;
-    // console.log(studentClasses);
-    var list = [];
-    for(i=0;i<studentClasses.length;i++){
-        var temp = await classModel.findOne({'classCode':studentClasses[i]});
-        list.push(temp);
-    }
-    res.status(200).send(list);
+    const studentData = await studentModel.findById(id).populate('classes')
+    res.status(200).send(studentData.classes);
 })
 
 //get single class
@@ -100,6 +103,27 @@ cRouter.get('/:id',async(req,res)=>{
     await classModel.findOne({"_id":id})
     .then((cls)=>{
         res.send(cls);
+    })
+});
+
+//update class by teacher
+cRouter.put('/update',verifyToken,async(req,res)=>{
+    const classid = req.body.classid;
+    const classCode = req.body.classCode;
+    const className = req.body.className;
+    await classModel.findByIdAndUpdate({"_id":classid},{$set:{"classCode":classCode,"className":className}})
+    .then(function(){
+        res.status(200).send();
+    })
+})
+
+//delete class by teacher
+cRouter.delete('/delete/:id',verifyToken,async(req,res)=>{
+    const id = req.params.id;
+    await classModel.findByIdAndDelete({"_id":id})
+    .then(()=>{
+        console.log('Class Deleted');
+        res.status(200).send();
     })
 })
 

@@ -16,6 +16,6 @@ const teacherSchema = new Schema({
         type:String,
         required:true,
     },
-    classes:[]
+    classes:[{type: Schema.Types.ObjectId, ref:'classes'}]
 });
 module.exports = mongoose.model('teachers',teacherSchema);

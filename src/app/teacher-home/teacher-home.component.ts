@@ -22,4 +22,14 @@ export class TeacherHomeComponent implements OnInit {
     localStorage.setItem('editid',code);
     this.router.navigate(['editClass']);
   }
+  deleteClass(id:any){
+    var retVal = confirm("Do you want to delete this class?");
+    if(retVal){
+      this.cs.deleteClass(id).subscribe((data)=>{
+        location.reload();
+      })
+    }
+
+    }
+    
 }

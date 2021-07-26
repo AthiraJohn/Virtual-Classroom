@@ -20,6 +20,7 @@ export class EditClassComponent implements OnInit {
     this.createClassform = this.fb.group({
       className:['',[Validators.required]],
       classCode:['',[Validators.required]],
+      classid:[''],
       tId:[localStorage.getItem('tId')]
     })
   }
@@ -34,6 +35,7 @@ export class EditClassComponent implements OnInit {
       this.createClassform.setValue({
         className:data['className'],
         classCode:data['classCode'],
+        classid:data['_id'],
         tId:localStorage.getItem('tId')
       })
     })
@@ -41,7 +43,15 @@ export class EditClassComponent implements OnInit {
   }
 
   updateClass(){
-    console.log(this.createClassform.value);
+    this.cs.updateClass(this.createClassform.value).subscribe(
+      res=>{
+        alert('Details Updated');
+        this.router.navigate(['teacherHome']);
+      },
+      err=>{
+        console.log(err.error);
+      }
+    )
   }
 
 }

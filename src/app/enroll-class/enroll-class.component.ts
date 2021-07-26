@@ -18,8 +18,8 @@ export class EnrollClassComponent implements OnInit {
     })
   }
 
-  enroll(classCode:any){
-    this.cs.enrollClass(classCode,localStorage.getItem('sId')).subscribe(
+  enroll(id:any){
+    this.cs.enrollClass(id,localStorage.getItem('sId')).subscribe(
       res=>{
         alert('Student Enrolled in Class');
         this.router.navigate(['studentHome']);

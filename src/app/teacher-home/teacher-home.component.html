@@ -23,7 +23,7 @@
                     <th>{{class.className}}</th>
                     <th><button class="btn btn-warning mx-2" (click)="edit(class._id)">Edit</button>
                     <button class="btn btn-primary mx-2">Go to Class</button>
-                    <button class="btn btn-danger ">Delete</button></th>
+                    <button class="btn btn-danger" (click)="deleteClass(class._id)">Delete</button></th>
                 </tr>
             </tbody>
         </table>
