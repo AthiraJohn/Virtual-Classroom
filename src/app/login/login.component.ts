@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         res=>{
           localStorage.setItem('tId',res.id);
           localStorage.setItem('token',res.token);
+          localStorage.setItem('name',res.username);
           this._router.navigate(['teacherHome']);
         },
         err=>{
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
       res=>{
         localStorage.setItem('sId',res.id);
         localStorage.setItem('token',res.token);
+        localStorage.setItem('name',res.username);
         this._router.navigate(['studentHome']);
       },
       err=>{

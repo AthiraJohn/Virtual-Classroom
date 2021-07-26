@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ClassesService } from '../classes.service';
+import { classModel } from '../create-class/class.model';
 
 @Component({
   selector: 'app-teacher-home',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teacher-home.component.css']
 })
 export class TeacherHomeComponent implements OnInit {
-
-  constructor() { }
+  classes: classModel[]=[];
+  constructor(private cs:ClassesService,private router:Router) { }
 
   ngOnInit(): void {
+    this.cs.getClassTeacher(localStorage.getItem('tId')).subscribe((data)=>{
+      this.classes = JSON.parse(JSON.stringify(data))
+      console.log(this.classes);
+    })
   }
-
+  edit(code:any){
+    localStorage.setItem('editid',code);
+    this.router.navigate(['editClass']);
+  }
 }

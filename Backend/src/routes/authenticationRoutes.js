@@ -53,7 +53,8 @@ aRouter.post('/Tlogin',async(req,res)=>{
             let payload = {subject:email+pwd};
             let token = jwt.sign(payload,'#key');
             const id = data._id;
-            res.status(200).send({id,token});
+            const username = data.username;
+            res.status(200).send({id,token,username});
         }
     }
 });
@@ -101,9 +102,11 @@ aRouter.post('/Slogin',async(req,res)=>{
             let payload = {subject:email+pwd};
             let token = jwt.sign(payload,'#key');
             const id = data._id;
-            res.status(200).send({id,token});
+            const username = data.username
+            res.status(200).send({id,token,username});
         }
     }
 })
+
 
 module.exports = aRouter;

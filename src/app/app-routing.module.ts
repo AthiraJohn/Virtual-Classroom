@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { CreateClassComponent } from './create-class/create-class.component';
+import { EditClassComponent } from './edit-class/edit-class.component';
 import { EnrollClassComponent } from './enroll-class/enroll-class.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'teacherHome',canActivate:[AuthGuard],component:TeacherHomeComponent},
   {path:'studentHome',canActivate:[AuthGuard],component:StudentHomeComponent},
   {path:'createclass',canActivate:[AuthGuard],component:CreateClassComponent},
-  {path:'enrollclass',canActivate:[AuthGuard],component:EnrollClassComponent}
+  {path:'enrollclass',canActivate:[AuthGuard],component:EnrollClassComponent},
+  {path:'editClass',canActivate:[AuthGuard],component:EditClassComponent}
 ]  
 
 @NgModule({

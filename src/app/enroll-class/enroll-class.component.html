@@ -1,1 +1,28 @@
-<p>enroll-class works!</p>
+<body>
+    <div class="card col-md-8 offset-2">
+        <div class="card-body">
+          <h5 class="card-title">Enroll in a Class</h5>
+          <h3>Available Classes</h3>
+          <table class="table table-stripped table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Class Code</th>
+                <th>Class Name</th>
+                <th>Handled By</th>
+                <th>Enroll</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let class of classes">
+                  <th>&#8226;</th>
+                  <th>{{class.classCode}}</th>
+                  <th>{{class.className}}</th>
+                  <th>{{class.Teacher}}</th>
+                  <th><button class="btn btn-primary" (click)="enroll(class.classCode)">Enroll</button></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </body>

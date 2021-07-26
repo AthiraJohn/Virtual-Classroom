@@ -34,6 +34,10 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token');
   }
+
+  // nameexist(){
+  //   return !!localStorage.getItem('name');
+  // }
   //teacher signup
   teacherSignup(teacher:any):Observable<any>{
     return this.http.post<any>('http://localhost:3000/auth/TsignUp',{'teacher':teacher});

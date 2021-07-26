@@ -5,7 +5,7 @@
       </h1>
     </div>
 
-    <form [formGroup]="createClassform" (ngSubmit)="createClass()"> 
+    <form [formGroup]="createClassform" (ngSubmit)="updateClass()"> 
         <div class="container">
           <div class="row">
             <div class="col-lg-7" style="margin-left: 25%;">
@@ -26,7 +26,7 @@
                         </tr>  
                         <tr>
                           <td></td>
-                          <td><button type="submit" [disabled]="createClassform.invalid" class="btn btn-info" style="margin-left: 5%;color: navy;"><b>Create Class</b></button></td>                  
+                          <td><button type="submit" [disabled]="createClassform.invalid" class="btn btn-info" style="margin-left: 5%;color: navy;"><b>Update Class</b></button></td>                  
                         </tr>             
                       </tbody>
                     </table>

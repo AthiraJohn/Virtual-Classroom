@@ -15,6 +15,8 @@ import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { CreateClassComponent } from './create-class/create-class.component';
 import { EnrollClassComponent } from './enroll-class/enroll-class.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditClassComponent } from './edit-class/edit-class.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +28,16 @@ import { EnrollClassComponent } from './enroll-class/enroll-class.component';
     TeacherHomeComponent,
     StudentHomeComponent,
     CreateClassComponent,
-    EnrollClassComponent
+    EnrollClassComponent,
+    EditClassComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [AuthService,
     {

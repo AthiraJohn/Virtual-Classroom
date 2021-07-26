@@ -1,1 +1,29 @@
-<p>student-home works!</p>
+<h1 style="text-align: center;">Student Home</h1>
+<br>
+<br>
+<br>
+<div class="card col-md-8 offset-2" style=" background-color:#83c5be;">
+    <div class="card-header">
+        <h3>Enrolled Classes</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-bordered border-primary">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Class Code</th>
+                    <th>Class Name</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let class of classes">
+                    <th scope="row">&#8226;</th>                        
+                    <th>{{class.classCode}}</th>
+                    <th>{{class.className}}</th>
+                    <th><button class="btn btn-primary mx-2">Go to Class</button></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -19,8 +19,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 const authRouter = require('./src/routes/authenticationRoutes');
+const classRouter = require('./src/routes/classRoutes');
 
 app.use('/auth',authRouter);
+app.use('/class',classRouter);
 
 
 app.listen(port,()=>{

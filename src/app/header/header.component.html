@@ -1,7 +1,7 @@
 <div style="background-color: navy;">
     <nav class="navbar">
         <h3 class="name"><strong>{{title}}</strong></h3>
-        <ul class="nav-list  ">
+        <ul class="nav-list">
             <li><a routerLink="/" *ngIf="!_auth.loggedIn()">Home</a></li>
             <li><a routerLink="/signup" *ngIf="!_auth.loggedIn()">Sign Up</a></li>
             <li><a routerLink="/login" *ngIf="!_auth.loggedIn()">Login</a></li>
@@ -9,6 +9,7 @@
             <li><a routerLink="/createclass" *ngIf="_auth.isTeacher()">Create a Class</a></li>
             <li><a routerLink="/studentHome" *ngIf="_auth.isStudent()">Student Home</a></li>
             <li><a routerLink="/enrollclass" *ngIf="_auth.isStudent()">Enroll in a Class</a></li>
+            <li class="text-danger" *ngIf=check()>{{name}}</li>
             <li><a (click)="logoutUser()" *ngIf="_auth.loggedIn()">Logout</a></li>
         </ul>
     </nav>

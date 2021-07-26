@@ -10,6 +10,9 @@ const classSchema = new Schema({
         type:String,
         requied:true,
     },
+    Teacher:{
+        type:String,
+    },
     Notes:[{topic:String,content:String}],
     Assignments:[{title:String,content:String}]
 });
