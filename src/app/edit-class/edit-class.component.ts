@@ -21,6 +21,7 @@ export class EditClassComponent implements OnInit {
       className:['',[Validators.required]],
       classCode:['',[Validators.required]],
       classid:[''],
+      description:['',[Validators.required]],
       tId:[localStorage.getItem('tId')]
     })
   }
@@ -36,6 +37,7 @@ export class EditClassComponent implements OnInit {
         className:data['className'],
         classCode:data['classCode'],
         classid:data['_id'],
+        description:data['description'],
         tId:localStorage.getItem('tId')
       })
     })

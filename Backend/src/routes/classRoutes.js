@@ -17,7 +17,6 @@ cRouter.post('/create',verifyToken,async(req,res)=>{
     const tId = req.body.class.tId;
     const classCode = req.body.class.classCode;
     const temp = await classModel.countDocuments({classCode:classCode});
-    console.log(tId);
     var teachertemp = await teacherModel.findById(tId);
     // console.log(temp);
     if(!temp){
@@ -25,6 +24,7 @@ cRouter.post('/create',verifyToken,async(req,res)=>{
         classData.className = req.body.class.className;
         classData.classCode = req.body.class.classCode;
         classData.Teacher = teachertemp.username
+        classData.description = req.body.class.description;
         // var teacherData = await teacherModel.updateOne({"_id":tId},
         //                                                     {$push:{classes:classCode}});                                                           
         classData.save(async(err,doc)=>{

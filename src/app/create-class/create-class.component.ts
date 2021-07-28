@@ -15,6 +15,7 @@ export class CreateClassComponent implements OnInit {
   createClassform = this.fb.group({
     className:['',[Validators.required]],
     classCode:['',[Validators.required]],
+    description:['',[Validators.required]],
     tId:[localStorage.getItem('tId')]
   })
   constructor(private fb:FormBuilder,private router:Router,private cs:ClassesService) {}

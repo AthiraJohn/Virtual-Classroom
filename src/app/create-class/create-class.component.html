@@ -25,6 +25,11 @@
                           <td><span class="text-danger" *ngIf="(fcontrol.classCode.touched) && fcontrol.classCode.errors?.required">Enter the class Code</span></td>
                         </tr>  
                         <tr>
+                          <td><label style="font-size: 18px;"><b>Enter the Class Description</b></label></td>
+                          <td> <textarea name="" id="" cols="30" formControlName="description"  rows="10"></textarea> </td>
+                          <td><span class="text-danger" *ngIf="fcontrol.description.touched && fcontrol.description.errors?.required">Class Description is required!</span></td>
+                        </tr>
+                        <tr>
                           <td></td>
                           <td><button type="submit" [disabled]="createClassform.invalid" class="btn btn-info" style="margin-left: 5%;color: navy;"><b>Create Class</b></button></td>                  
                         </tr>             

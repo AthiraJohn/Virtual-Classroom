@@ -13,6 +13,10 @@ const classSchema = new Schema({
     Teacher:{
         type:String,
     },
+    description:{
+        type:String,
+        required:true
+    },
     Notes:[{topic:String,content:String}],
     Assignments:[{title:String,content:String}]
 });
