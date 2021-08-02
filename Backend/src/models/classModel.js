@@ -17,8 +17,8 @@ const classSchema = new Schema({
         type:String,
         required:true
     },
-    Notes:[{topic:String,content:String}],
-    Assignments:[{title:String,content:String}]
+    notes:[{type:Schema.Types.ObjectId, ref:'notes'}],
+    assignments:[{type:Schema.Types.ObjectId, ref:'assignments'}]
 });
 
 module.exports = mongoose.model('classes',classSchema);

@@ -17,6 +17,10 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { EnrollClassComponent } from './enroll-class/enroll-class.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditClassComponent } from './edit-class/edit-class.component';
+import { GoToClassComponent } from './go-to-class/go-to-class.component';
+import { NotesComponent } from './notes/notes.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
+import { SubmissionsComponent } from './submissions/submissions.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { EditClassComponent } from './edit-class/edit-class.component';
     StudentHomeComponent,
     CreateClassComponent,
     EnrollClassComponent,
-    EditClassComponent
+    EditClassComponent,
+    GoToClassComponent,
+    NotesComponent,
+    AssignmentsComponent,
+    SubmissionsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,12 +10,13 @@ import { classModel } from '../create-class/class.model';
 })
 export class TeacherHomeComponent implements OnInit {
   classes: classModel[]=[];
+  title:String="";
   constructor(private cs:ClassesService,private router:Router) { }
 
   ngOnInit(): void {
     this.cs.getClassTeacher(localStorage.getItem('tId')).subscribe((data)=>{
       this.classes = JSON.parse(JSON.stringify(data))
-      console.log(this.classes);
+      // console.log(this.classes);
     })
   }
   edit(code:any){
@@ -30,6 +31,11 @@ export class TeacherHomeComponent implements OnInit {
       })
     }
 
+    }
+
+    gotoClass(id:any){
+        localStorage.setItem('classId',id);
+        this.router.navigate(['gotoclass']);
     }
     
 }

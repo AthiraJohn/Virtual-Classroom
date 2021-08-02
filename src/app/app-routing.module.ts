@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AssignmentsComponent } from './assignments/assignments.component';
 import { AuthGuard } from './auth.guard';
 import { CreateClassComponent } from './create-class/create-class.component';
 import { EditClassComponent } from './edit-class/edit-class.component';
 import { EnrollClassComponent } from './enroll-class/enroll-class.component';
+import { GoToClassComponent } from './go-to-class/go-to-class.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { NotesComponent } from './notes/notes.component';
 import { SignupComponent } from './signup/signup.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
+import { SubmissionsComponent } from './submissions/submissions.component';
 import { TeacherHomeComponent } from './teacher-home/teacher-home.component';
 
 const routes: Routes = [
@@ -18,7 +22,11 @@ const routes: Routes = [
   {path:'studentHome',canActivate:[AuthGuard],component:StudentHomeComponent},
   {path:'createclass',canActivate:[AuthGuard],component:CreateClassComponent},
   {path:'enrollclass',canActivate:[AuthGuard],component:EnrollClassComponent},
-  {path:'editClass',canActivate:[AuthGuard],component:EditClassComponent}
+  {path:'editClass',canActivate:[AuthGuard],component:EditClassComponent},
+  {path:'gotoclass',canActivate:[AuthGuard],component:GoToClassComponent},
+  {path:'notes',canActivate:[AuthGuard],component:NotesComponent},
+  {path:'assignments',canActivate:[AuthGuard],component:AssignmentsComponent},
+  {path:'submissions',canActivate:[AuthGuard],component:SubmissionsComponent}
 ]  
 
 @NgModule({

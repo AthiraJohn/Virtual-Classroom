@@ -11,7 +11,7 @@ import { UserModel } from './user.model';
 export class SignupComponent implements OnInit {
   title = "Signup";
   radio:String="";
-  roles: string[] = ['admin','student','teacher'];
+  roles: string[] = ['student','teacher'];
   constructor(private auth:AuthService ,private router: Router) { }
 
   ngOnInit(): void {

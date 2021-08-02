@@ -21,7 +21,7 @@
                     <th scope="row">&#8226;</th>                        
                     <th>{{class.classCode}}</th>
                     <th>{{class.className}}</th>
-                    <th><button class="btn btn-primary mx-2">Go to Class</button></th>
+                    <th><button class="btn btn-primary mx-2"(click)="gotoClass(class._id)">Go to Class</button></th>
                 </tr>
             </tbody>
         </table>

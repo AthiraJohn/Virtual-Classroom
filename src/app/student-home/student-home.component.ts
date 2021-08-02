@@ -19,4 +19,9 @@ export class StudentHomeComponent implements OnInit {
     })
   }
 
+  gotoClass(classId:any){
+    localStorage.setItem('classId',classId);
+    this.router.navigate(['gotoclass']);
+  }
+
 }

@@ -1,0 +1,45 @@
+<h1 style="color: navy; margin-top: 1%; margin-bottom: 2%; text-align: center;">{{title}}
+    <p class="lead"></p>
+</h1>
+
+<div class="card col-md-6 offset-3">
+    <div class="card-header">
+            <h3>Assignments</h3>
+            <button class="btn btn-primary" *ngIf="_auth.isTeacher();" (click)="openform()">Create Assignments</button>
+            <div class="container form-popup" id="myForm" style="display: none;">
+                <form [formGroup]="assignmentForm">
+                    <strong><label class="form-label" for="">Assignment Title</label></strong>
+                    <input type="text" formControlName="title" class="form-control" name="" id="">
+                    <div class="text-danger" *ngIf="fcontrol.title.touched && fcontrol.title.errors?.required">Field required</div>
+                    <strong><label for="" class="form-name">Question(Link)</label></strong>                
+                    <input type="text" formControlName="content" name="" class="form-control" id="">
+                    <div class="text-danger" *ngIf="fcontrol.content.touched && fcontrol.content.errors?.required">Field required</div>
+                    <br>
+                    <button class="btn btn-success mx-2"[disabled]="assignmentForm.invalid"  (click)="createAssignment()" >Create</button>
+                    <button class="btn btn-danger" (click)="closeform()">Close</button>
+                </form>
+            </div>
+    </div>
+    <div class="card-body">
+        <div class="container form-popup" id="submissionForm" style="display: none;">
+            <form [formGroup]="subForm">
+                <strong><label class="form-label" for="">Submission(link)</label></strong>
+                <input type="text" formControlName="submission" class="form-control" name="" id="">
+                <div class="text-danger" *ngIf="scontrol.submission.touched && scontrol.submission.errors?.required">Field required</div>
+                <br>
+                <button class="btn btn-success mx-2"[disabled]="subForm.invalid"  (click)="submission()" >Submit</button>
+                <button class="btn btn-danger" (click)="submitFormClose()">Close</button>
+            </form>
+        </div>
+        <ul *ngFor = "let ag of assignment">
+            <li>{{ag.title}}</li>
+                <ul>
+                    <button class="btn btn-success mx-2" (click)="viewAssignment(ag.content);" >View</button>
+                    <button class="btn btn-danger mx-2" *ngIf="_auth.isTeacher();"  (click)="deleteAssignment(ag._id);">Delete</button>
+                    <button class="btn btn-warning" *ngIf="_auth.isStudent();" (click)="submitFormOpen(ag._id)">Submit</button>                    
+                    <button class="btn btn-info" *ngIf="_auth.isTeacher();" (click)="submissions(ag._id)" >Submissions</button>
+                </ul>
+        </ul>
+    </div>
+
+</div>

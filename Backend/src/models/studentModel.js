@@ -16,7 +16,8 @@ const studentSchema = new Schema({
         required:true
     },
     classes:[{type: Schema.Types.ObjectId, ref:'classes'}],
-    submissions:[{classCode:String,work:String}]
+    // submissions:[{asid:String,submission:String}]
+    submissions:[{type:Schema.Types.ObjectId,ref:'submissions'}]
 });
 
 module.exports = mongoose.model('students',studentSchema);

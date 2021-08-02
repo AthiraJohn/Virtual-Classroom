@@ -6,8 +6,9 @@ const mongoose = require('mongoose');
 const classModel = require('../models/classModel');
 const teacherModel = require('../models/teacherModel');
 const studentModel = require('../models/studentModel');
-const { Mongoose } = require('mongoose');
-const { consoleTestResultHandler } = require('tslint/lib/test');
+const noteModel = require('../models/notesModel');
+const assignmentModel = require('../models/assignmentsModel');
+const submissionModel = require('../models/submissionModel');
 
 const toId = mongoose.Types.ObjectId;
 
@@ -29,7 +30,7 @@ cRouter.post('/create',verifyToken,async(req,res)=>{
         //                                                     {$push:{classes:classCode}});                                                           
         classData.save(async(err,doc)=>{
          if(!err){
-             const id = doc._id;
+            const id = doc._id;
             var teacherData = await teacherModel.updateOne({"_id":tId},{$push:{classes:id}});
              res.send(doc);
            }
@@ -125,6 +126,151 @@ cRouter.delete('/delete/:id',verifyToken,async(req,res)=>{
         console.log('Class Deleted');
         res.status(200).send();
     })
+});
+
+
+
+//create note by teacher
+cRouter.post('/createNote',verifyToken,async(req,res)=>{
+    const classId = req.body.id;
+    var noteData = new noteModel();
+    noteData.classId = classId;
+    noteData.title = req.body.noteData.title;
+    noteData.content = req.body.noteData.content;
+    noteData.save(async(err,doc)=>{
+        if(!err){
+            const id = doc._id;
+            const d = 'renjith';
+            await classModel.updateOne({"_id":classId},{$push:{notes:id,submission:d}});
+            res.send(doc);
+            
+        }
+        else{
+            console.log(err);
+        }
+    })
+});
+
+//get notes of a class
+cRouter.post('/getNotes',verifyToken,async(req,res)=>{
+    const classId = req.body.classId;
+    console.log(classId);
+    const classData = await classModel.findById(classId).populate('notes');
+    res.status(200).send(classData.notes);
+});
+
+//delete a note
+cRouter.delete('/deleteNote/:id',verifyToken,async(req,res)=>{
+    const id = req.params.id;
+    await noteModel.findByIdAndDelete({"_id":id})
+    .then(()=>{
+        console.log('Class Deleted');
+        res.status(200).send();
+    })
+});
+
+//create assignment
+cRouter.post('/createAssignment',verifyToken,async(req,res)=>{
+    const classId = req.body.id;
+    var assignmentData = new assignmentModel;
+    assignmentData.classId = classId;
+    assignmentData.title = req.body.assignmentData.title;
+    assignmentData.content = req.body.assignmentData.content;
+    assignmentData.save(async(err,doc)=>{
+        if(!err){
+            const id = doc._id;
+            await classModel.updateOne({"_id":classId},{$push:{assignments:id}});
+            res.send(doc);
+            
+        }
+        else{
+            console.log(err);
+        }
+    })
+});
+
+//get Assignments of a class
+cRouter.post('/getAssignments',verifyToken,async(req,res)=>{
+    const classId = req.body.classId;
+    // console.log(classId);
+    const classData = await classModel.findById(classId).populate('assignments');
+    res.status(200).send(classData.assignments);
+});
+
+//delete an assignment
+cRouter.delete('/deleteAssignment/:id',verifyToken,async(req,res)=>{
+    const id = req.params.id;
+    await assignmentModel.findByIdAndDelete({"_id":id})
+    .then(()=>{
+        res.status(200).send();
+    })
+});
+
+//submit assignment student
+cRouter.post('/submitAssignment',verifyToken,async(req,res)=>{
+    const submission = req.body.submission;
+    const asid = req.body.asid;
+    const sId = req.body.sId;
+    // const sub = {
+    //     asid : asid,
+    //     submission: submission.submission
+    // }
+    // var check = await studentModel.find({"_id":sId,"submissions.asid":asid});
+    // // console.log(check);
+    // if(!check.length){
+    //     var studentSubmission = await studentModel.updateOne({"_id":sId},{$push:{submissions:sub}});
+    //     res.status(200).send();
+    // }
+    // else{
+    //     res.status(401).send('Already Submitted');
+    // }
+    var check = await submissionModel.find({"sid":sId},{"asid":asid});
+    if(!check.length){
+        var submissionData = new submissionModel;
+        submissionData.sid = sId;
+        submissionData.asid = asid;
+        submissionData.submission = submission.submission;
+        submissionData.save(async(err,doc)=>{
+            if(!err){
+                const id = doc._id;
+                await studentModel.updateOne({"_id":sId},{$push:{submissions:id}});
+                res.send(doc);
+            }
+            else{
+                console.log(err);
+            }
+        })
+    }
+    else{
+        res.status(400).send('Assignment Already submitted');
+    }
+
+});
+
+//get a single assignment
+cRouter.post('/getAssignment',verifyToken,async(req,res)=>{
+    const asid = req.body.asid;
+    const data = await assignmentModel.findById(asid);
+    res.send(data);
+})
+
+//get all submissions of an assignment
+cRouter.post('/submissions',async(req,res)=>{
+    const asid = req.body.asid;
+    const subm = await submissionModel.find({"asid":asid}).populate('students');
+    // console.log(subm);
+    const data = [];
+    for(i=0;i<subm.length;i++){
+        var temp = {name:"",submission:""};
+        temp.submission = subm[i].submission;
+        var tempName = await studentModel.findById(subm[i].sid);
+        // console.log(tempName.username);
+        temp.name = tempName.username;
+        // console.log(temp);
+        data.push(temp);
+    }
+    // console.log(data);z
+    res.send(data);
 })
 
 module.exports = cRouter;

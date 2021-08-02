@@ -1,0 +1,26 @@
+<h1 style="color: navy; margin-top: 1%; margin-bottom: 2%; text-align: center;">Submissions
+    <p class="lead"></p>
+</h1>
+<div class="card col-md-6 offset-3">
+    <div class="card-header">
+      <span><strong>Assignment: <div style="display: inline;" class="text-primary">{{asName}}</div></strong> </span> 
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Student Name</th>
+                    <th>Submission</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of submissionData">
+                    <th>.</th>
+                    <th>{{data.name}}</th>
+                    <th><button class="btn btn-primary" (click)="gotoSubmission(data.submission)">View Submission</button></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
