@@ -89,4 +89,9 @@ export class ClassesService {
     return this.http.post('http://localhost:3000/class/submissions',{'asid':asid});
   }
 
+  //get submission status by student
+  getSubmissionStatus(asid:any,sid:any):Observable<any>{
+    return this.http.post<any>('http://localhost:3000/class/submissionStatus',{'asid':asid,'sid':sid});
+  }
+
 }

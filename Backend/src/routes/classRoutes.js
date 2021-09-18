@@ -112,7 +112,8 @@ cRouter.put('/update',verifyToken,async(req,res)=>{
     const classid = req.body.classid;
     const classCode = req.body.classCode;
     const className = req.body.className;
-    await classModel.findByIdAndUpdate({"_id":classid},{$set:{"classCode":classCode,"className":className}})
+    const description = req.body.description;
+    await classModel.findByIdAndUpdate({"_id":classid},{$set:{"classCode":classCode,"className":className,"description":description}})
     .then(function(){
         res.status(200).send();
     })
@@ -154,7 +155,7 @@ cRouter.post('/createNote',verifyToken,async(req,res)=>{
 //get notes of a class
 cRouter.post('/getNotes',verifyToken,async(req,res)=>{
     const classId = req.body.classId;
-    console.log(classId);
+    // console.log(classId);
     const classData = await classModel.findById(classId).populate('notes');
     res.status(200).send(classData.notes);
 });
@@ -224,7 +225,10 @@ cRouter.post('/submitAssignment',verifyToken,async(req,res)=>{
     // else{
     //     res.status(401).send('Already Submitted');
     // }
-    var check = await submissionModel.find({"sid":sId},{"asid":asid});
+    var check = await submissionModel.find({$and:[{"sid":sId},{"asid":asid}]});
+    console.log(sId);
+    console.log(asid);
+    console.log(check);
     if(!check.length){
         var submissionData = new submissionModel;
         submissionData.sid = sId;
@@ -246,6 +250,23 @@ cRouter.post('/submitAssignment',verifyToken,async(req,res)=>{
     }
 
 });
+
+
+//get submission status
+cRouter.post('/submissionStatus',verifyToken,async(req,res)=>{
+    const asid = req.body.asid;
+    const sid = req.body.sid;
+    var check = 0;
+    console.log(asid+' '+sid);
+    const data = await submissionModel.find({$and:[{"sid":sid},{"asid":asid}]});
+    console.log(data);
+    if(data.length){
+        res.send(data);
+    }
+    else{
+        res.status(400).send('No submission Found');
+    }
+})
 
 //get a single assignment
 cRouter.post('/getAssignment',verifyToken,async(req,res)=>{

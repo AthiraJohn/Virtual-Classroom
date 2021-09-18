@@ -36,8 +36,9 @@
                 <ul>
                     <button class="btn btn-success mx-2" (click)="viewAssignment(ag.content);" >View</button>
                     <button class="btn btn-danger mx-2" *ngIf="_auth.isTeacher();"  (click)="deleteAssignment(ag._id);">Delete</button>
-                    <button class="btn btn-warning" *ngIf="_auth.isStudent();" (click)="submitFormOpen(ag._id)">Submit</button>                    
-                    <button class="btn btn-info" *ngIf="_auth.isTeacher();" (click)="submissions(ag._id)" >Submissions</button>
+                    <button class="btn btn-warning mx-2" *ngIf="_auth.isStudent();" (click)="submitFormOpen(ag._id)">Submit</button>
+                    <button class="btn btn-primary mx-2" *ngIf="_auth.isStudent();" (click)="submissionStatus(ag._id)">View Submission</button>                    
+                    <button class="btn btn-info mx-2" *ngIf="_auth.isTeacher();" (click)="submissions(ag._id)" >Submissions</button>
                 </ul>
         </ul>
     </div>

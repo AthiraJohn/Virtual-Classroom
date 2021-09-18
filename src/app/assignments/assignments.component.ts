@@ -16,7 +16,8 @@ export class AssignmentsComponent implements OnInit {
   cls:classModel;
   asid:String;
   assignment:assignmentModel;
-  constructor(private cs:ClassesService,private router:Router,private fb:FormBuilder,public _auth:AuthService) { }
+  assignment2: assignmentModel;
+  constructor(public cs:ClassesService,private router:Router,private fb:FormBuilder,public _auth:AuthService) { }
 
   assignmentForm = this.fb.group({
     title:['',[Validators.required]],
@@ -106,5 +107,20 @@ export class AssignmentsComponent implements OnInit {
   submissions(id:any){
     localStorage.setItem('asid',id);
     this.router.navigate(['submissions']);
+  }
+
+  //submission status
+  submissionStatus(asid:any){
+    this.cs.getSubmissionStatus(asid,localStorage.getItem('sId')).subscribe(
+      res=>{
+        // alert('Submission Found');
+        // console.log(res[0].submission);
+        window.open(res[0].submission);
+      },
+      err=>{
+        alert(err.error);
+        console.log(err.error);
+      }
+    )
   }
 }
