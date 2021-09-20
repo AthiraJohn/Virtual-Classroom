@@ -55,4 +55,30 @@ export class AuthService {
     return this.http.post<any>('http://localhost:3000/auth/Slogin',{'student':student});
   }
 
+  //admin login
+  adminLogin(admin:any):Observable<any>{
+    return this.http.post<any>('http://localhost:3000/admin/login',{'admin':admin});
+  }
+
+  //admin services
+  
+  //list all students
+  listStudents(){
+    return this.http.get('http://localhost:3000/admin/listStudents');
+  }
+
+  //delete a student
+  deleteStudent(id:any){
+    return this.http.delete('http://localhost:3000/admin/deleteStudent/'+id);
+  }
+
+  //list all teachers
+  listTeachers(){
+    return this.http.get('http://localhost:3000/admin/listTeachers');
+  }
+
+  //delete a teacher
+  deleteTeacher(id:any){
+    return this.http.delete('http://localhost:3000/admin/deleteTeacher/'+id);
+  }
 }

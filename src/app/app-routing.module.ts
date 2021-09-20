@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminStudentsComponent } from './admin-students/admin-students.component';
+import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { AuthGuard } from './auth.guard';
 import { CreateClassComponent } from './create-class/create-class.component';
@@ -26,7 +30,11 @@ const routes: Routes = [
   {path:'gotoclass',canActivate:[AuthGuard],component:GoToClassComponent},
   {path:'notes',canActivate:[AuthGuard],component:NotesComponent},
   {path:'assignments',canActivate:[AuthGuard],component:AssignmentsComponent},
-  {path:'submissions',canActivate:[AuthGuard],component:SubmissionsComponent}
+  {path:'submissions',canActivate:[AuthGuard],component:SubmissionsComponent},
+  {path:'admin-home',canActivate:[AuthGuard],component:AdminHomeComponent},
+  {path:'admin-students',canActivate:[AuthGuard],component:AdminStudentsComponent},
+  {path:'admin-teachers',canActivate:[AuthGuard],component:AdminTeachersComponent},
+  {path:'adduser/:type',canActivate:[AuthGuard],component:AdminAddUserComponent}
 ]  
 
 @NgModule({

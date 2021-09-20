@@ -21,6 +21,11 @@ import { GoToClassComponent } from './go-to-class/go-to-class.component';
 import { NotesComponent } from './notes/notes.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { SubmissionsComponent } from './submissions/submissions.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { AdminStudentsComponent } from './admin-students/admin-students.component';
+import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
+import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import { SubmissionsComponent } from './submissions/submissions.component';
     GoToClassComponent,
     NotesComponent,
     AssignmentsComponent,
-    SubmissionsComponent
+    SubmissionsComponent,
+    AdminHomeComponent,
+    AdminNavbarComponent,
+    AdminStudentsComponent,
+    AdminTeachersComponent,
+    AdminAddUserComponent,
   ],
   imports: [
     BrowserModule,

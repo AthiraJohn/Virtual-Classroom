@@ -124,7 +124,7 @@ cRouter.delete('/delete/:id',verifyToken,async(req,res)=>{
     const id = req.params.id;
     await classModel.findByIdAndDelete({"_id":id})
     .then(()=>{
-        console.log('Class Deleted');
+        // console.log('Class Deleted');
         res.status(200).send();
     })
 });
@@ -257,9 +257,9 @@ cRouter.post('/submissionStatus',verifyToken,async(req,res)=>{
     const asid = req.body.asid;
     const sid = req.body.sid;
     var check = 0;
-    console.log(asid+' '+sid);
+    // console.log(asid+' '+sid);
     const data = await submissionModel.find({$and:[{"sid":sid},{"asid":asid}]});
-    console.log(data);
+    // console.log(data);
     if(data.length){
         res.send(data);
     }
@@ -286,6 +286,8 @@ cRouter.post('/submissions',async(req,res)=>{
         temp.submission = subm[i].submission;
         var tempName = await studentModel.findById(subm[i].sid);
         // console.log(tempName.username);
+        if(!tempName)
+            continue;
         temp.name = tempName.username;
         // console.log(temp);
         data.push(temp);

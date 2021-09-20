@@ -1,0 +1,37 @@
+<div class="card col-md-6 offset-3 mt-4">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>Add {{type}}</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form #userSignup="ngForm" (ngSubmit)="add()">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="text" class="form-control" #name="ngModel"  style="width: 350px;" name="name"
+                                    [(ngModel)]="user.username" placeholder="Enter Username.." required />
+                                <strong style="color: red;" *ngIf="name.touched && name.errors?.required">Enter username</strong>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Email</label>
+              <input type="email" class="form-control" style="width: 350px;" name="email"
+                                    #email="ngModel" [class.is-invalid]="email.invalid && email.touched"
+                                    [(ngModel)]="user.email"
+                                    pattern="([A-Za-z0-9\.\-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3})?"
+                                    placeholder="Enter your E-mail.." required />
+                                <!-- <small class="text-danger" [class.d-none]="email.valid || email.touched"></small> -->
+                                <strong style="color:red;" [class.d-none]="email.valid || email.untouched">Enter Valid email</strong>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">password</label>
+              <input type="password" class="form-control" style="width: 350px;" name="pwd"
+              [class.is-invalid]="pwd.invalid && pwd.touched" #pwd="ngModel"
+              [(ngModel)]="user.pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*).{8,}" minlength="6" placeholder="Enter your Password.." required />
+          <strong class="text-danger" [class.d-none]="pwd.valid || pwd.untouched">Password must be alphanumeric, minimum 8 characters, atleast 1 special character and upper/lower case alphabets</strong>
+            </div>
+            
+            <button type="submit" class="btn btn-primary"
+                                [disabled]="userSignup.form.invalid"><b>Submit</b></button>
+          </form>
+    </div>
+</div>

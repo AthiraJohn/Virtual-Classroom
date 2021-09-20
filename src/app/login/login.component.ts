@@ -29,10 +29,21 @@ export class LoginComponent implements OnInit {
   // }
   login(){
     if(this.radio=="admin"){
-      //
+      this._auth.adminLogin(this.user).subscribe(
+        res=>{
+          localStorage.setItem('token',res.token);
+          localStorage.setItem('name',res.username);
+          this._router.navigate(['admin-students']);
+        },
+        err=>{
+          alert(err.error);
+          console.log(err);
+          window.location.reload();
+        }
+      )
     }
     else if(this.radio=="teacher"){
-      console.log(this.radio);
+      // console.log(this.radio);
       this._auth.teacherLogin(this.user).subscribe(
         res=>{
           localStorage.setItem('tId',res.id);

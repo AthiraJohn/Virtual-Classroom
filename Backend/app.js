@@ -20,10 +20,12 @@ app.use(express.json());
 
 const authRouter = require('./src/routes/authenticationRoutes');
 const classRouter = require('./src/routes/classRoutes');
+const adminRouter = require('./src/routes/adminRoutes');
+
 
 app.use('/auth',authRouter);
 app.use('/class',classRouter);
-
+app.use('/admin',adminRouter);
 
 app.listen(port,()=>{
     console.log(`Server listening on port:${port}`);
