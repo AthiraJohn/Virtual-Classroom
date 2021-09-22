@@ -1,11 +1,11 @@
 <app-admin-navbar></app-admin-navbar>
-<h1 style="color: navy; margin-top: 1%; margin-bottom: 2%; text-align: center;">Students List
+<h1 style="color: rgb(146, 25, 106); margin-top: 1%; margin-bottom: 2%; text-align: center;">Students List
     <p class="lead"></p>
-    <button class="btn btn-primary" [routerLink]="['/adduser','Student']" >Add Student</button>
+    <button class="btn btn-primary" style="background-color: rgb(226,75,176);" [routerLink]="['/adduser','Student']">Add Student</button>
 </h1>
 
-<div class="card col-md-6 offset-3">
-    
+<div class="card col-md-6 offset-3" style="background-color: rgb(240, 197, 226);">
+
     <div class="card-body">
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -17,11 +17,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor = "let data of student">
+                <tr *ngFor="let data of student">
                     <th>.</th>
                     <th>{{data.name}}</th>
                     <th>
-                        <ul *ngFor = "let x of data.classes">
+                        <ul *ngFor="let x of data.classes">
                             <li>{{x}}</li>
                         </ul>
                     </th>

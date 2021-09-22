@@ -1,4 +1,4 @@
-<div style="background-color: navy;">
+<div style="background-color: rgb(170,67,136);">
     <nav class="navbar">
         <h3 class="name"><strong>{{title}}</strong></h3>
         <ul class="nav-list">
@@ -9,7 +9,7 @@
             <li><a routerLink="/createclass" *ngIf="_auth.isTeacher()">Create a Class</a></li>
             <li><a routerLink="/studentHome" *ngIf="_auth.isStudent()">Student Home</a></li>
             <li><a routerLink="/enrollclass" *ngIf="_auth.isStudent()">Enroll in a Class</a></li>
-            <li class="text-danger" *ngIf=check()>{{name}}</li>
+            <li class="text" *ngIf=check()><strong>{{name}}</strong></li>
             <li><a (click)="logoutUser()" *ngIf="_auth.loggedIn()">Logout</a></li>
         </ul>
     </nav>
