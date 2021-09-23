@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost:27017/VirtualClassroom',{
+mongoose.connect('mongodb+srv://userrenjith:userrenjith@projectfiles.dmtoz.mongodb.net/VirtualClassroom?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology:true
